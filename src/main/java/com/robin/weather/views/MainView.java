@@ -6,6 +6,7 @@ import com.robin.weather.controller.WeatherService;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.ClassResource;
 import com.vaadin.server.ExternalResource;
+import com.vaadin.server.Responsive;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
@@ -41,11 +42,13 @@ public class MainView extends UI
     
     @Override
 	protected void init(VaadinRequest request) {
-		// TODO Auto-generated method stub
 		mainLayout();
+		Responsive.makeResponsive(mainLayout);
 		setHeader();
 		setLogo();
 		setForm();
+		Responsive.makeResponsive(dashboard);
+		Responsive.makeResponsive(mainDescriptionLayout);
 		dashboardTitle();
 		dashboardDetails();
 		searchButton.addClickListener(clickEvent -> {
@@ -125,8 +128,9 @@ public class MainView extends UI
 		HorizontalLayout logo=new HorizontalLayout();
 		logo.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
 		Image img=new Image(null,new ClassResource("/static/logo.png"));
-		logo.setWidth("240px");
-		logo.setHeight("240px");
+		img.setWidth("120px");
+		img.setHeight("120px");
+		logo.setWidth("100%");
 		logo.addComponent(img);
 		mainLayout.addComponents(logo);
 	}
@@ -136,27 +140,27 @@ public class MainView extends UI
 		formLayout.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
 		formLayout.setSpacing(true);
 		formLayout.setMargin(true);
+		formLayout.setWidth("100%");
 		//selection Component
 		unitSelect =new NativeSelect<>();
 		ArrayList<String> items=new ArrayList<>();
 		items.add("°C");
 		items.add("°F");
-		 unitSelect.setItems(items);
-		 unitSelect.setValue(items.get(0));
-		 formLayout.addComponent(unitSelect);
-		 
-		 //cityTextField
-		 cityTextField=new TextField();
-		 cityTextField.setWidth("80%");
-		 formLayout.addComponent(cityTextField);
-		 
-		 //search button
-		 searchButton=new Button();
-		 searchButton.setIcon(VaadinIcons.SEARCH);
-		 formLayout.addComponent(searchButton);
-		 
-		 
-		 mainLayout.addComponents(formLayout);
+		unitSelect.setItems(items);
+		unitSelect.setValue(items.get(0));
+		unitSelect.setWidth("80px");
+		formLayout.addComponent(unitSelect);
+		//cityTextField
+		cityTextField=new TextField();
+		cityTextField.setWidth("100%");
+		formLayout.addComponent(cityTextField);
+		//search button
+		searchButton=new Button();
+		searchButton.setIcon(VaadinIcons.SEARCH);
+		searchButton.setWidth("50px");
+		formLayout.addComponent(searchButton);
+		mainLayout.addComponents(formLayout);
+		Responsive.makeResponsive(formLayout);
 	}
 	
 	private void dashboardTitle()
