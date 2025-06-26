@@ -10,20 +10,24 @@ import org.json.JSONObject;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
 public class MyWeather
  {
 	 private OkHttpClient client;
 	 private Response response;
 	 private String cityName="New Delhi";
 	 String unit="metric";
-	 @SuppressWarnings("unused")
-	private String API="e081f8e2fca5d5f3b840cb5239637a73";
+	 @Value("${openweathermap.api.key}")
+	 private String API;
 	 
 	 public JSONObject getWeather()
 	 {
 		 client=new OkHttpClient();
 		 Request request=new Request.Builder().
-				 url("http://api.openweathermap.org/data/2.5/weather?q="+getCityName()+"&units="+getUnit()+"&appid=e081f8e2fca5d5f3b840cb5239637a73")
+				 url("http://api.openweathermap.org/data/2.5/weather?q="+getCityName()+"&units="+getUnit()+"&appid="+API)
 				 .build();
 		 try {
 		 response=client.newCall(request).execute();
