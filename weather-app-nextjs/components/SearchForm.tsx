@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Search } from 'lucide-react';
+import { Search, ChevronDown, MapPin } from 'lucide-react';
 
 interface SearchFormProps {
   onSearch: (city: string, unit: string) => void;
@@ -17,6 +17,10 @@ export default function SearchForm({ onSearch, loading }: SearchFormProps) {
     if (city.trim()) {
       onSearch(city.trim(), unit);
     }
+  };
+
+  const getUnitDisplayText = (unitValue: string) => {
+    return unitValue === 'metric' ? 'Celsius (°C)' : 'Fahrenheit (°F)';
   };
 
   return (
@@ -37,25 +41,43 @@ export default function SearchForm({ onSearch, loading }: SearchFormProps) {
               value={city}
               onChange={(e) => setCity(e.target.value)}
               placeholder="Enter city name..."
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
               required
+              autoComplete="off"
             />
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <MapPin className="w-4 h-4 text-gray-400" />
+            </div>
           </div>
+          {city && (
+            <div className="mt-1 text-sm text-gray-500">
+              Typed: {city}
+            </div>
+          )}
         </div>
 
         <div>
           <label htmlFor="unit" className="block text-sm font-medium text-gray-700 mb-2">
             Temperature Unit
           </label>
-          <select
-            id="unit"
-            value={unit}
-            onChange={(e) => setUnit(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          >
-            <option value="metric">Celsius (°C)</option>
-            <option value="imperial">Fahrenheit (°F)</option>
-          </select>
+          <div className="relative">
+            <select
+              id="unit"
+              value={unit}
+              onChange={(e) => setUnit(e.target.value)}
+              className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white cursor-pointer text-gray-900"
+              style={{ backgroundImage: 'none' }}
+            >
+              <option value="metric">Celsius (°C)</option>
+              <option value="imperial">Fahrenheit (°F)</option>
+            </select>
+            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+              <ChevronDown className="w-4 h-4 text-gray-400" />
+            </div>
+          </div>
+          <div className="mt-1 text-sm text-gray-500">
+            Selected: {getUnitDisplayText(unit)}
+          </div>
         </div>
 
         <button
