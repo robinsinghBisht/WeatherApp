@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.vaadin.server.Page;
 
 import javax.swing.*;
 
@@ -25,7 +26,7 @@ public class MainView extends UI
 	private WeatherService weatherService;
     private VerticalLayout mainLayout;
     private NativeSelect<String> unitSelect;
-    private TextField cityTextField; 
+    private TextField cityTextField;
 	private Button searchButton;
 	private HorizontalLayout dashboard;
 	private Label location;
@@ -39,9 +40,11 @@ public class MainView extends UI
 	private Label wind;
 	private Label feelsLike;
 	private Image iconImg;
-    
+
     @Override
 	protected void init(VaadinRequest request) {
+		// Inject custom mobile CSS
+		Page.getCurrent().getStyles().add("<link rel='stylesheet' type='text/css' href='mobile.css' />");
 		mainLayout();
 		Responsive.makeResponsive(mainLayout);
 		setHeader();
@@ -87,7 +90,7 @@ public class MainView extends UI
 			iconCode=weatherObject.getString("icon");
 			weatherDescriptionNew=weatherObject.getString("description");
 			System.out.println(weatherDescriptionNew);
-			
+
 		}
 		iconImg.setSource(new ExternalResource("http://openweathermap.org/img/wn/"+iconCode+".png"));
 		weatherDescription.setValue("Description: "+weatherDescriptionNew);
@@ -162,38 +165,38 @@ public class MainView extends UI
 		mainLayout.addComponents(formLayout);
 		Responsive.makeResponsive(formLayout);
 	}
-	
+
 	private void dashboardTitle()
 	{
 		dashboard= new HorizontalLayout();
 		dashboard.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
-		
+
 		//city location
 		location=new Label("Cuurently in new delhi");
 		location.addStyleName(ValoTheme.LABEL_H2);
 		location.addStyleName(ValoTheme.LABEL_LIGHT);
-		
+
 		//current TEMP
 		currentTemp=new Label("18°C");
 		currentTemp.setStyleName(ValoTheme.LABEL_BOLD);
 		currentTemp.setStyleName(ValoTheme.LABEL_H1);
-		
+
 		dashboard.addComponents(location,iconImg,currentTemp);
-		
-		
+
+
 		//
-		
+
 	}
-	
+
 	private void dashboardDetails()
 	{
 		mainDescriptionLayout=new HorizontalLayout();
 		mainDescriptionLayout.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
-		
+
 		//description layout
 		VerticalLayout descriptionLayout=new VerticalLayout();
 		descriptionLayout.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
-		
+
 		//weather description
 		weatherDescription=new Label("Description: Sunny");
 		weatherDescription.setStyleName(ValoTheme.LABEL_SUCCESS);

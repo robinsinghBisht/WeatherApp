@@ -1,0 +1,30 @@
+/* Mobile-specific styles for WeatherApp */
+
+@media (max-width: 600px) {
+  .v-label, .v-button, .v-textfield, .v-native-select, .v-image {
+    font-size: 1.2em !important;
+  }
+  .v-textfield, .v-native-select {
+    min-width: 90vw !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+  .v-button {
+    min-width: 80vw !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+    margin-top: 10px;
+  }
+  .v-image {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  .v-vertical-layout, .v-horizontal-layout {
+    padding: 8px !important;
+  }
+  .v-horizontal-layout {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+} 
