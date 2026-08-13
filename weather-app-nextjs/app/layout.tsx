@@ -1,12 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
-
 export const metadata: Metadata = {
-  title: 'Weather App',
-  description: 'A modern weather application built with Next.js',
+  title: 'Aether — Weather, in its clearest form',
+  description: 'A calm, glassy weather dashboard powered by OpenWeather.',
 }
 
 export default function RootLayout({
@@ -16,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>{children}</body>
     </html>
   )
-} 
+}

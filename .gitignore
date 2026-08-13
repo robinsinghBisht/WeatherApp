@@ -1,6 +1,36 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
+# Node / Next.js
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+out/
+**/out/
+.turbo/
+coverage/
+**/coverage/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment and local secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Runtime output
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
 ### STS ###
 .apt_generated
 .classpath
@@ -11,6 +41,7 @@ target/
 
 ### IntelliJ IDEA ###
 .idea
+.run/
 *.iws
 *.iml
 *.ipr

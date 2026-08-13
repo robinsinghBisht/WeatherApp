@@ -1,8 +1,15 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
-}
+const backendUrl = process.env.BACKEND_URL || 'http://localhost:9090';
 
-module.exports = nextConfig 
+const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: '/api/weather/:path*',
+        destination: `${backendUrl}/api/weather/:path*`,
+      },
+    ];
+  },
+};
+
+module.exports = nextConfig;

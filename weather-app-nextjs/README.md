@@ -9,7 +9,8 @@ A modern React Next.js application that consumes weather data from your Java Spr
 - 💨 Wind speed and direction
 - 💧 Humidity and pressure information
 - 📱 Responsive design for mobile and desktop
-- ⚡ Fast and modern UI with Tailwind CSS
+- ✨ Glassmorphism dashboard with hourly forecast, sunrise/sunset, visibility, cloud cover, and weather guidance
+- ⚡ Fast and modern UI with Tailwind CSS and Framer Motion
 
 ## Prerequisites
 
@@ -39,6 +40,7 @@ The app communicates with your Java backend at `http://localhost:9090/api/weathe
 
 - `GET /api/weather/current?city={city}&unit={unit}` - Get current weather
 - `GET /api/weather/details?city={city}&unit={unit}` - Get detailed weather information
+- `GET /api/weather/overview?city={city}&unit={unit}` - Get the current weather plus the next eight 3-hour forecast points used by the dashboard
 
 ## Project Structure
 
@@ -80,7 +82,7 @@ npm start
 
 ## Environment Variables
 
-Make sure your Java backend is running on `http://localhost:9090` or update the API base URL in `lib/api.ts`.
+In local development, the default same-origin `/api/weather` path is proxied by Next.js to `http://localhost:9090`. Set `NEXT_PUBLIC_API_URL` only when the backend is hosted separately. The Spring backend reads `OPENWEATHERMAP_API_KEY` (or the legacy `key`) from the environment; it is never needed in the browser.
 
 ## Troubleshooting
 
@@ -97,4 +99,4 @@ Make sure your Java backend is running on `http://localhost:9090` or update the 
 
 ## License
 
-This project is for demonstration purposes. 
+This project is for demonstration purposes.
